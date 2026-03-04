@@ -1,0 +1,22 @@
+// Source code is decompiled from a .class file using FernFlower decompiler (from Intellij IDEA).
+class Demo {
+   Demo() {
+   }
+
+   static void checkAge(int var0) {
+      if (var0 < 18) {
+         throw new ArithmeticException("Not eligible");
+      } else {
+         System.out.println("Eligible");
+      }
+   }
+
+   public static void main(String[] var0) {
+      try {
+         checkAge(15);
+      } catch (Exception var2) {
+         System.out.println(var2.getMessage());
+      }
+
+   }
+}
