@@ -1,3 +1,7 @@
-.red{
-    color:red;
+.notification{
+    position: absolute;
+    background-color: blue;
+    padding: 160px;
+    right: 1px;
+    bottom: 1px;
 }

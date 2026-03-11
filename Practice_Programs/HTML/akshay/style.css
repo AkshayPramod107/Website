@@ -1,0 +1,22 @@
+*{
+    margin:0;
+    padding: 0;
+    border: 0;
+}
+.container{
+    display: flex;
+    /* flex-direction: column; */
+    gap: 10px;
+    background-color: green;
+    justify-content: center;
+    height: 100vh;
+    align-items: flex-end;
+}
+
+.box{
+    width: 100px;
+    height: 100px;
+    background-color: yellow;
+    border: 1px solid black;
+    margin-bottom: 20px;
+}
