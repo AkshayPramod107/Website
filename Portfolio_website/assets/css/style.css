@@ -3,13 +3,13 @@
 
 /* CSS Variables for Light Theme */
 :root {
-  --primary-color: #0c1a30; /* Navy blue */
-  --secondary-color: #1a365d; /* Lighter navy */
-  --accent-color: #2b6cb0; /* Bright blue for links/buttons */
-  --text-primary: #1e293b; /* Dark Slate Gray */
-  --text-secondary: #475569; /* Gray */
-  --bg-main: #f8fafc; /* Very light gray */
-  --bg-card: #ffffff; /* White */
+  --primary-color: #0c1a30; 
+  --secondary-color: #1a365d; 
+  --accent-color: #2b6cb0;
+  --text-primary: #1e293b;
+  --text-secondary: #475569;
+  --bg-main: #f8fafc;
+  --bg-card: #ffffff;
   --border-color: #e2e8f0;
   
   --font-family: 'Inter', sans-serif;
