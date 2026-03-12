@@ -1,10 +1,11 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Contact | Akshay P P</title>
-  <meta name="description" content="Contact Akshay P P for opportunities and collaboration.">
+  <title>Contact | Akshay P</title>
+  <meta name="description" content="Contact Akshay P for opportunities and collaboration.">
   <link rel="stylesheet" href="assets/css/style.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   <style>
@@ -14,6 +15,7 @@
       padding: 4rem 0;
       text-align: center;
     }
+
     .page-header h1 {
       color: #fff;
       margin-bottom: 0;
@@ -58,10 +60,13 @@
       font-size: 1.2rem;
       margin-bottom: 0.5rem;
     }
-    .info-card a, .info-card p {
+
+    .info-card a,
+    .info-card p {
       color: var(--text-secondary);
       font-size: 1rem;
     }
+
     .info-card a:hover {
       color: var(--accent-color);
     }
@@ -135,12 +140,13 @@
     }
   </style>
 </head>
+
 <body>
 
   <!-- Navigation -->
   <nav class="navbar">
     <div class="container nav-container">
-      <a href="index.html" class="logo">Akshay P P</a>
+      <a href="index.html" class="logo">Akshay P</a>
       <div class="hamburger">
         <span></span>
         <span></span>
@@ -166,7 +172,7 @@
 
   <!-- Contact Content -->
   <section class="container contact-section">
-    
+
     <!-- Info -->
     <div class="contact-info fade-in">
       <div class="info-card">
@@ -191,29 +197,31 @@
     <!-- Form -->
     <div class="contact-form-container fade-in">
       <h2 style="margin-bottom: 2rem;">Send a Message</h2>
-      <form id="contactForm" novalidate>
-        
+      <form id="contactForm" action="https://formspree.io/f/mzdjrpwn" method="POST" novalidate>
+
         <div class="form-group">
           <label for="name">Full Name</label>
-          <input type="text" id="name" class="form-control" placeholder="John Doe" required>
+          <input type="text" id="name" name="name" class="form-control" placeholder="John Doe" required>
           <div class="error-msg" id="nameError">Please enter your full name.</div>
         </div>
 
         <div class="form-group">
           <label for="email">Email Address</label>
-          <input type="email" id="email" class="form-control" placeholder="john@example.com" required>
+          <input type="email" id="email" name="email" class="form-control" placeholder="john@example.com" required>
           <div class="error-msg" id="emailError">Please enter a valid email address.</div>
         </div>
 
         <div class="form-group">
           <label for="subject">Subject</label>
-          <input type="text" id="subject" class="form-control" placeholder="How can I help you?" required>
+          <input type="text" id="subject" name="subject" class="form-control" placeholder="How can I help you?"
+            required>
           <div class="error-msg" id="subjectError">Please enter a subject.</div>
         </div>
 
         <div class="form-group">
           <label for="message">Message</label>
-          <textarea id="message" class="form-control" placeholder="Your message here..." required></textarea>
+          <textarea id="message" name="message" class="form-control" placeholder="Your message here..."
+            required></textarea>
           <div class="error-msg" id="messageError">Please enter your message.</div>
         </div>
 
@@ -229,33 +237,35 @@
   <footer>
     <div class="container footer-content">
       <div class="social-links">
-        <a href="https://www.linkedin.com/in/akshaypramodp" target="_blank" aria-label="LinkedIn"><i class="fab fa-linkedin"></i></a>
+        <a href="https://www.linkedin.com/in/akshaypramodp" target="_blank" aria-label="LinkedIn"><i
+            class="fab fa-linkedin"></i></a>
         <a href="https://github.com/akshaypramodp" target="_blank" aria-label="GitHub"><i class="fab fa-github"></i></a>
         <a href="mailto:akshaypramod107@gmail.com" aria-label="Email"><i class="fas fa-envelope"></i></a>
       </div>
-      <p>&copy; 2026 Akshay P P. Built with modern web standards.</p>
+      <p>&copy; 2026 Akshay P. Built with modern web standards.</p>
     </div>
   </footer>
 
   <script src="assets/js/main.js"></script>
   <script>
     // Form Validation Logic
-    document.getElementById('contactForm').addEventListener('submit', function(e) {
+    document.getElementById('contactForm').addEventListener('submit', async function (e) {
       e.preventDefault();
-      
+
       let isValid = true;
-      
+
       const name = document.getElementById('name');
       const email = document.getElementById('email');
       const subject = document.getElementById('subject');
       const message = document.getElementById('message');
-      
+
       const nameError = document.getElementById('nameError');
       const emailError = document.getElementById('emailError');
       const subjectError = document.getElementById('subjectError');
       const messageError = document.getElementById('messageError');
       const successMsg = document.getElementById('successMsg');
-      
+      const submitBtn = this.querySelector('button[type="submit"]');
+
       // Reset errors
       [nameError, emailError, subjectError, messageError].forEach(el => el.style.display = 'none');
       successMsg.style.display = 'none';
@@ -282,14 +292,39 @@
       }
 
       if (isValid) {
-        // Simulate real API call
-        successMsg.style.display = 'block';
-        this.reset();
-        setTimeout(() => {
-          successMsg.style.display = 'none';
-        }, 5000);
+        // Disable button during submission
+        const originalBtnText = submitBtn.textContent;
+        submitBtn.textContent = 'Sending...';
+        submitBtn.disabled = true;
+
+        try {
+          const formData = new FormData(this);
+          const response = await fetch(this.action, {
+            method: 'POST',
+            body: formData,
+            headers: {
+              'Accept': 'application/json'
+            }
+          });
+
+          if (response.ok) {
+            successMsg.style.display = 'block';
+            this.reset();
+            setTimeout(() => {
+              successMsg.style.display = 'none';
+            }, 5000);
+          } else {
+            alert('Oops! There was a problem submitting your form');
+          }
+        } catch (error) {
+          alert('Oops! There was a problem submitting your form');
+        } finally {
+          submitBtn.textContent = originalBtnText;
+          submitBtn.disabled = false;
+        }
       }
     });
   </script>
 </body>
+
 </html>
